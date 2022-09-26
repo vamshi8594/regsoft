@@ -1,0 +1,127 @@
+<!-- This document is used in iframe of registrations.php file which is activated on clicking register menu option  -->
+<!DOCTYPE html>
+<html>
+<style>
+body
+{
+font-family: Lucida Sans Unicode;
+}
+</style>
+
+<script>
+function evalve() {
+   var check=document.getElementById('mail').value;
+   if(check.indexOf('@')!=-1)
+    {
+        if(check.indexOf('.com')==-1)
+         {
+		 alert("Invalid Mail Id");
+		 document.registration.mailId.focus();
+		 }
+		else
+        {  
+		    var checkno=document.getElementById('number').value;
+            if(((''+checkno).length==10||(''+checkno).length==11)&& Number(checkno))
+	    	{
+				document.getElementById("register").submit();
+			}
+			else
+			{	
+			alert("Invalid phone no");
+			document.registration.phoneNo.focus();
+			}
+	    }
+	}
+	 else
+	  { 
+	  alert("Invalid Mail Id");
+	  document.registration.mailId.focus();
+	   }
+}
+</script>
+<body >
+
+<!--giving the title-->
+<center><h2>REGISTRATIONS</h2></center>
+<!--starting of the form whoose name is registration  -->
+<form  id="register" name="registration" action="register.php" method="post" >
+  <center><!--staring of center tag which displays entire content in the center of form -->
+<!--starting of paragraph which keeps all event related dropdown list in a single row -->
+    <p >
+	   EVENT NAME:<!--starting of event name select tag -->
+		<select  id="EventName" name="EventName" onchange="pop(this.id,'amount')">
+			
+			 <option class="specialColor" slected value="PAPER_PRESENTATION">PAPER PRESENTATION</option>
+			 <option class="specialColor" value="PROJECT_EXPO">PROJECT_EXPO	</option>
+			 <option class="specialColor" value="CODE_EX">CODE_EX</option>
+			 <option class="specialColor" value="CODE_HUNT_WITH_C">CODE_HUNT_WITH_C	</option>
+			 <option class="specialColor" value="PIXEL_PLAY">PIXEL_PLAY</option>
+			 <option class="specialColor" value="COMBO">COMBO</option>
+		</select><!--end of event name select tag -->
+	   AMOUNT:<!--start of amount select tag -->
+	   <select  id="amount" name="amount" >
+	   	 <option slected value="50">50</option>
+	   </select><!--end of amount select tag -->
+	</p><!--end of paragraph containing all select tags -->
+<script>
+//this function is triggered immediately after  the eventname is selected.
+function pop(s1,s2){
+	var s1 = document.getElementById(s1);
+	var s2 = document.getElementById(s2);
+	s2.innerHTML = "";
+	//switch function checking the value in eventtype select tag .
+	switch(s1.value)
+    {	
+	 case "PAPER_PRESENTATION":var optionArray = ["50&#8377|50&#8377"];break;
+	 case  "PROJECT_EXPO":var optionArray = ["100&#8377|100&#8377"];break;
+	 case "CODE_EX":var optionArray = ["50&#8377|50&#8377"];break;
+	 case  "CODE_HUNT_WITH_C":var optionArray = ["50&#8377|50&#8377"];break;
+	 case "PIXEL_PLAY":var optionArray = ["50&#8377|50&#8377"];break;
+	 case  "COMBO":var optionArray = ["150&#8377|150&#8377"];break;
+	 }
+		//for loop assigning the value based on the result of if condition.
+	for(var option in optionArray){
+		var pair = optionArray[option].split("|");
+		var newOption = document.createElement("option");
+		newOption.value = pair[0];
+		newOption.innerHTML = pair[1];
+		s2.options.add(newOption);
+	}
+}
+</script>
+<!-- start of table which contains name,college,mailid and phone no-->
+	<table >
+		<tr>
+			<td>NAME</td>
+			<td><input  type="text" name="name" value=""></td>
+		</tr>	
+		<tr> 
+			<td></td>
+		</tr>	
+		<tr>	
+			<td>MAIL ID</td>
+			<td><input  id="mail" type="text" name="mailId" value=""></td>
+		</tr>
+		<tr> 
+			<td></td>
+		</tr>	
+		<tr>
+			<td>COLLEGE</td>    
+			<td><input  type="text" name="college" value="VIGNAN"></td>	
+		</tr>
+		<tr> 
+			<td></td>
+		</tr>	
+		<tr>	
+			<td>PHONE NO</td>
+			<td><input id="number" type="text" name="phoneNo" value=""></td>
+		</tr>
+	</table>
+<!--end of the table-->
+	</br>
+<!--submit button takes the control to page mentioned in action property -->
+	<input  type="button" onclick="evalve();"  value="submit">
+</form>
+<!--end of the form. -->
+</body>
+</html>
